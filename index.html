@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>- R A D U F E E T -</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @font-face {
+      font-family: "Bequta";
+      src: url("fonts/Bequta-1j5pv.otf") format("opentype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center-top;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #fff;
+
+      /* === BACKGROUND IMAGE ===
+         Swap the url() below for your own image, e.g. url("images/background.jpg").
+         The linear-gradient on top darkens the photo so text stays readable.
+         The gradient also acts as a fallback if the image is missing. */
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80")
+        center / cover no-repeat fixed;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;           /* keep the text above the feet image */
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-family: "Bequta", sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      font-family: "Bequta", sans-serif;
+      letter-spacing: 0.08em;
+      margin-top: 1rem;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      opacity: 0.9;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .feet {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50vw;          /* ~half the screen width  */
+      height: 50vh;         /* ~half the screen height */
+      object-fit: contain;  /* keep aspect ratio inside that box */
+      z-index: 0;           /* sits behind the text; transparency shows the bg */
+      pointer-events: none;
+    }
+
+    .emoji {
+      height: 1em;
+      width: auto;
+      vertical-align: -0.15em;   /* nudges it to sit on the text baseline */
+    }
+  </style>
+</head>
+<body>
+  <img src="images/feet.png" alt="" class="feet">
+  <div class="card">
+    <h1>- R A D U F E E T -</h1>
+    <p>Taste the radufian wilderness <img src="images/mama.png" alt="" class="emoji"></p>
+  </div>
+</body>
+</html>
