@@ -49,7 +49,7 @@ h1 {
 
 p {
   position: fixed;            /* anchor the subtitle to the bottom */
-  bottom: 15rem;
+  bottom: 10rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;                 /* keep it above the feet image */
