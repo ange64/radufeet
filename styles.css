@@ -13,10 +13,10 @@ body {
   min-height: 100svh;       /* svh = small viewport height: avoids mobile
                                address-bar from forcing a tiny scroll */
   display: flex;
-  align-items: flex-start;   /* anchor the card (title) to the top */
-  justify-content: center;
+  flex-direction: column;    /* title at top, subtitle pushed to the bottom */
+  align-items: center;       /* horizontally centre both */
   padding: 1.5rem;          /* keeps content off the screen edges on mobile */
-  overflow: hidden;         /* the layout is fixed-positioned; no scrolling */
+  overflow: hidden;         /* the layout fits the viewport; no scrolling */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #fff;
 
@@ -48,14 +48,12 @@ h1 {
 }
 
 p {
-  position: fixed;            /* anchor the subtitle to the bottom */
-  bottom: 8rem;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: auto;           /* pushes the subtitle to the bottom of the column */
+  margin-bottom: 6rem;        /* gap above the bottom edge — tweak this to raise/lower */
+  position: relative;
   z-index: 1;                 /* keep it above the feet image */
   width: 100%;
   text-align: center;
-  padding: 0 1.5rem;          /* breathing room on narrow screens */
   font-family: "Bequta", sans-serif;
   letter-spacing: 0.08em;
   font-size: clamp(1rem, 3vw, 1.5rem);   /* min, fluid, max */
