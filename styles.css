@@ -58,7 +58,8 @@ p {
   letter-spacing: 0.08em;
   font-size: clamp(1rem, 3vw, 1.5rem);   /* min, fluid, max */
   opacity: 0.9;
-  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.75);
+  font-weight: bold;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 1);
 }
 
 .feet {
