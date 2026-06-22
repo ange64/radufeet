@@ -1,0 +1,183 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@font-face {
+  font-family: "Bequta";
+  src: url("fonts/Bequta-1j5pv.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;   /* anchor the card (title) to the top */
+  justify-content: center;
+  padding: 1.5rem;          /* keeps content off the screen edges on mobile */
+  overflow-x: hidden;       /* belt-and-braces: no sideways scroll */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #fff;
+
+  /* === BACKGROUND IMAGE ===
+     Swap the url() below for your own image, e.g. url("images/background.jpg").
+     The linear-gradient on top darkens the photo so text stays readable.
+     The gradient also acts as a fallback if the image is missing. */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80")
+    center / cover no-repeat fixed;
+}
+
+.card {
+  position: relative;
+  z-index: 1;           /* keep the text above the feet image */
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  font-family: "Bequta", sans-serif;
+  font-size: clamp(1.75rem, 7vw, 5rem);   /* min, fluid, max */
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  overflow-wrap: break-word;   /* lets the title wrap instead of overflowing */
+  max-width: 100%;
+  height: 15em;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
+}
+
+p {
+  position: fixed;            /* anchor the subtitle to the bottom */
+  bottom: 15rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;                 /* keep it above the feet image */
+  width: 100%;
+  text-align: center;
+  padding: 0 1.5rem;          /* breathing room on narrow screens */
+  font-family: "Bequta", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: clamp(1rem, 3vw, 1.5rem);   /* min, fluid, max */
+  opacity: 0.9;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.75);
+}
+
+.feet {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vmin;        /* scales off the SHORTER screen side, so it stays */
+  height: 70vmin;       /* the same proportion on phones and desktops alike */
+  object-fit: contain;  /* keep aspect ratio inside that box */
+  z-index: 0;           /* sits behind the text; transparency shows the bg */
+  pointer-events: none;
+}
+
+/* mikey: anchored just to the LEFT of the (centered) feet image.
+   The feet is 70vmin wide and centered, so its left edge sits 35vmin from
+   the screen centre. We push mikey's right edge to that point, plus a 2vmin
+   gap -> translateX(calc(-100% - 37vmin)). Both images are fixed, so they
+   stay locked together at any screen size. */
+.mikey {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(-37vmin), -150%);   /* positioning only */
+  z-index: 0;
+  pointer-events: none;
+}
+.mikey img {
+  display: block;
+  height: 15vmin;       /* tweak to make mikey bigger / smaller */
+  width: auto;          /* keep its aspect ratio */
+  object-fit: contain;
+  transform-origin: 50% 0;                       /* swing from the top */
+  animation: mikey-sway 3s ease-in-out infinite; /* rotates -15deg <-> +15deg */
+}
+@keyframes mikey-sway {
+  0%, 100% { transform: rotate(-15deg); }
+  50%      { transform: rotate(15deg);  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mikey img { animation: none; }
+}
+
+.bob {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(18vmin), -100%);   /* positioning only */
+  z-index: 0;
+  pointer-events: none;
+}
+.bob img {
+  display: block;
+  height: 13vmin;       /* tweak to make spongebob bigger / smaller */
+  width: auto;          /* keep its aspect ratio */
+  object-fit: contain;
+  animation: bob-float 2.5s ease-in-out infinite;   /* gentle up & down */
+}
+@keyframes bob-float {
+  0%, 100% { transform: translateY(-12%); }
+  50%      { transform: translateY(12%);  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bob img { animation: none; }
+}
+
+/* clickable link anchored to the bottom-right corner */
+.oflink {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;                /* above the feet image and the subtitle */
+  line-height: 0;            /* removes the inline-image gap under the img */
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+@keyframes of-pulse {
+  0%, 100% { transform: scale(1);   }   /* +0%  */
+  50%      { transform: scale(1.2); }   /* +20% */
+}
+.oflink img {
+  width: clamp(80px, 12vw, 160px);   /* responsive size */
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+  animation: of-pulse 2.5s ease-in-out infinite;   /* gentle grow/shrink loop */
+}
+@media (prefers-reduced-motion: reduce) {
+  .oflink img { animation: none; }
+}
+.oflink:hover img {
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7)) brightness(1.1);
+}
+.oflink:hover {
+  transform: scale(1.08);
+}
+
+/* small-screen tweaks: tighter letter-spacing so the title fits comfortably */
+@media (max-width: 480px) {
+  h1 { letter-spacing: 0.04em; }
+  .card { padding: 1rem; }
+}
+
+.emoji {
+  height: 1em;
+  width: auto;
+  vertical-align: -0.15em;   /* nudges it to sit on the text baseline */
+}
+
+/* cycling subtitle: the inner span fades + slides on each swap */
+.sub-text {
+  display: inline-block;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.sub-text.is-leaving {       /* applied just before the text is swapped */
+  opacity: 0;
+  transform: translateY(20px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sub-text { transition: opacity 0.3s ease; }
+  .sub-text.is-leaving { transform: none; }   /* fade only, no motion */
+}
